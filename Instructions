@@ -1,0 +1,25 @@
+Documentation for Job Submissions script that parses and posts specified Gmail emails into a Google Sheets											
+											
+Set up filters in Gmail to Label desired emails											
+-	At least 2 filters because one will be removed to prevent reposting already posted emails into spreadsheet every time the script runs										
+-	chances are you will need more than 1 Filter for each Label to be able to tag all the emails.  Lots of different subject wording from each job poster makes it hard to filter every desired email.										
+	-	example Filter for Label 1 "Job Submissions"		"Matches: subject:(+"thank you" OR +"thanks" OR +"your") (and (+application OR +applying OR +interest))
+Do this: Apply label "Job Submissions"""					
+	-	example Filter for Label 2 "Job Submissions2"		Matches: subject:(+"thank you" OR +"thanks" OR +"your") (and (+application OR +applying OR +interest))
+Do this: Apply label "Job Submissions"""				
+											
+Create a blank Google Sheets
+  -	Click on the Extensions menu and select "Apps Script"																		
+  -	You will have a new untitled project.  
+  - Make sure you are in the Code.gs menu. 
+  - You will see a blank function.										
+									
+-	Name the project whatever you want... I named mine "Job Submissions"										
+  -	Drop in the code from code.gs in this repository
+	-	Note that there are 3 different functions here.  									
+		-	THe first called onOpen creates a menu on the Sheets menu bar called My Menu and then puts a submenu item called Copy Job Submissions.								
+		-	The second called getJobSubmissions looks through gmail for messages Labled "Job Submissions"								
+			-	It then looks for all messages in a specific thread and marks everything read and removes the label.							
+		-	The third called extractDetails pulls the Subject, Date Received, Sender and the Body (in plain text) and posts them in the Google Sheet.								
+											
+Once you run the Copy Jub Submissions, you will see that emails with Label Job Submissions will be posted into the Sheet, and they will only have Job Submissions2 Label in Gmail.											
